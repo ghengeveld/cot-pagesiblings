@@ -10,7 +10,8 @@ defined('COT_CODE') or die('Wrong URL');
 $sort = 'page_'.$cfg['page'][$pag['page_cat']]['order'];
 $way = $cfg['page'][$pag['page_cat']]['way'];
 
-$siblings = $db->query("SELECT * FROM $db_pages WHERE page_cat = ? ORDER BY ? ?", array($pag['page_cat'], $sort, $way))->fetchAll();
+$currentkey = -1;
+$siblings = $db->query("SELECT * FROM $db_pages WHERE page_cat = ? ORDER BY $sort $way", array($pag['page_cat']))->fetchAll();
 foreach ($siblings as $key => $data)
 {
 	$iscurrent = ($data['page_id'] == $id);
@@ -23,7 +24,7 @@ foreach ($siblings as $key => $data)
 }
 $t->parse('MAIN.SIBLINGS');
 
-if ($currentkey)
+if ($currentkey >= 0)
 {
 	if ($siblings[$currentkey-1])
 	{
