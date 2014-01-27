@@ -7,8 +7,8 @@ Hooks=page.tags
 
 defined('COT_CODE') or die('Wrong URL');
 
-$sort = 'page_'.$cfg['page'][$pag['page_cat']]['order'];
-$way = $cfg['page'][$pag['page_cat']]['way'];
+$sort = 'page_'.$cfg['page']['cat_'.$pag['page_cat']]['order'];
+$way  = $cfg['page']['cat_'.$pag['page_cat']]['way'];
 
 $currentkey = -1;
 $siblings = $db->query("SELECT * FROM $db_pages WHERE page_cat = ? ORDER BY $sort $way", array($pag['page_cat']))->fetchAll();
